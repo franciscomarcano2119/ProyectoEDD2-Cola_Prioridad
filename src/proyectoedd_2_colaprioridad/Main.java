@@ -8,7 +8,7 @@ import InterfacesGraficas.Bienvenida;
 
 /**
  *
- * @author yaxim
+ * @author francisco
  */
 public class Main {
 
