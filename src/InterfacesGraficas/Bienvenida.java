@@ -96,7 +96,7 @@ public class Bienvenida extends javax.swing.JFrame {
         jPanel2.add(EliminarDocumento, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 240, -1, -1));
 
         ColaImpresion.setText("Visualizar Cola de Impresión");
-        jPanel2.add(ColaImpresion, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 330, 200, -1));
+        jPanel2.add(ColaImpresion, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 320, 200, -1));
 
         AgregarUsuario.setText("Agregar Usuarios");
         AgregarUsuario.addActionListener(new java.awt.event.ActionListener() {
