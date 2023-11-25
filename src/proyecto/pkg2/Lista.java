@@ -47,8 +47,8 @@ public class Lista {
 
     
 
-    public void insertBegin(Object element) {
-        NodoL nodo = new NodoL(element);
+    public void insertBegin(Object element, int size, String nombre, String type, int hora, int printid) {
+        NodoL nodo = new NodoL(element, size, nombre, type, hora, printid);
         if (isEmpty()){
             setHead(nodo);
             setTail(nodo);
@@ -60,8 +60,8 @@ public class Lista {
     }
 
 
-    public void insertFinal(Object element) {
-        NodoL nodo = new NodoL(element);
+    public void insertFinal(Object element, int size, String nombre, String type, int hora, int printid) {
+        NodoL nodo = new NodoL(element, size, nombre, type, hora, printid);
         if (isEmpty()){
             setHead(nodo);
             setTail(nodo);
@@ -74,12 +74,7 @@ public class Lista {
     }
 
 
-    public void insertAtIndex(Object element, int index) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-
-    public Object deleteBegin() {
+    public NodoL deleteBegin() {
         if (isEmpty()){
             System.out.println("La lista esta vacia");
         }else{
@@ -99,7 +94,7 @@ public class Lista {
     }
 
 
-    public Object deleteFinal() {
+    public NodoL deleteFinal() {
         if (isEmpty()){
             System.out.println("La lista esta vacia");
         }else{
@@ -118,8 +113,35 @@ public class Lista {
         return null;
     }
     
-    public Object deleteAtIndex(int index) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public NodoL deleteAtIndex(int index) {
+        int cont = 0;
+        if(isEmpty()){
+            System.out.println("No hay nada en la lista");
+        } else{
+            if (index == 0){
+                return deleteBegin();
+            } else {
+                if (index < getSize()){
+                    NodoL pointer = getHead();
+                    while (cont < index - 1){
+                        pointer = pointer.getNext();
+                        cont++;
+                    }
+                    NodoL elim = pointer.getNext();
+                    pointer.setNext(elim.getNext());
+                    elim.setNext(null);
+                    elim.setPrevious(null);
+                    size--;
+                    return elim;
+                } else if (index == getSize()){
+                    return deleteFinal();
+                } else {
+                    System.out.println("Índice no válido");
+                    return null;
+                }
+            }
+        }
+        return null;
     }
 
 
@@ -127,7 +149,7 @@ public class Lista {
         return getHead() == null && getTail() == null;
     }
     
-    public void print(){
+    /*public void print(){
         NodoL pointer = getHead();
         if(isEmpty()){
             System.out.println("La lista esta vacia");
@@ -137,5 +159,5 @@ public class Lista {
             pointer = pointer.getNext();
         }
         }
-    }
+    }*/
 }

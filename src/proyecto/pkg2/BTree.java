@@ -12,14 +12,12 @@ package proyecto.pkg2;
 public class BTree {
     private Object dato;
     private NodoT root;
-    private NodoT hijoIzquierdo;
-    private NodoT hijoDerecho;
 
+    
     public BTree(Object dato) {
         this.dato = dato;
         this.root = null;
-        this.hijoIzquierdo = null;
-        this.hijoDerecho = null;
+
     }
 
     public Object getDato() {
@@ -30,22 +28,6 @@ public class BTree {
         this.dato = dato;
     }
 
-    public NodoT getHijoIzquierdo() {
-        return hijoIzquierdo;
-    }
-
-    public void setHijoIzquierdo(NodoT hijoIzquierdo) {
-        this.hijoIzquierdo = hijoIzquierdo;
-    }
-
-    public NodoT getHijoDerecho() {
-        return hijoDerecho;
-    }
-
-    public void setHijoDerecho(NodoT hijoDerecho) {
-        this.hijoDerecho = hijoDerecho;
-    }
-
     public NodoT getRoot() {
         return root;
     }
@@ -54,30 +36,8 @@ public class BTree {
         this.root = root;
     }
     
-     public boolean esHoja() {
-        return hijoIzquierdo == null && hijoDerecho == null;
-    }
-
-    public boolean tieneHijoIzquierdo() {
-        return hijoIzquierdo != null;
-    }
-
-    public boolean tieneHijoDerecho() {
-        return hijoDerecho != null;
-    }
-
-    public int contarHijos() {
-        int contador = 0;
-
-        if (tieneHijoIzquierdo()) {
-            contador++;
-        }
-
-        if (tieneHijoDerecho()) {
-            contador++;
-        }
-
-        return contador;
+    public boolean isEmpty(){
+        return getRoot() == null;
     }
     
     public NodoT buscarNodo(NodoT nodo, int dato) {
@@ -95,4 +55,115 @@ public class BTree {
         }
     }
     
+    public void insertarUsuario (int key, int orden, String user, NodoT pointer){
+        NodoT nodo = new NodoT(user, orden, key);
+        if (isEmpty()) {
+            setRoot(nodo);
+        } else{
+            if(key < pointer.getKey()){
+                if(pointer.getHizq() == null){
+                    pointer.setHizq(nodo);
+                }else{
+                    insertarUsuario (key,orden,user, pointer.getHizq());
+                }
+            }
+            if(key > pointer.getKey()){
+                if(pointer.getHdcha() == null){
+                    pointer.setHdcha(nodo);
+                }else{
+                    insertarUsuario (key,orden,user, pointer.getHdcha());
+                }
+            }
+        }
+    }
+    
+    public NodoT reemplazarNodo(NodoT nodo){
+        NodoT previous = nodo;
+        while(nodo.getHdcha() != null){
+            previous = nodo;
+            nodo = nodo.getHdcha();
+        }
+        previous.setHdcha(null);
+        if (nodo.getHizq() != null){
+            previous.setHdcha(nodo.getHizq());
+        }
+        return nodo;
+    }
+    
+    public NodoT buscarNodo(int key) {
+        NodoT pointer = getRoot();
+        while (pointer != null && key != pointer.key) {
+          if (key < pointer.key) {
+            pointer = pointer.getHizq();
+          } else {
+            pointer = pointer.getHdcha();
+          }
+        }
+        return pointer;
+    }
+    
+    public boolean hijoIzq(NodoT nodo){
+        return nodo.getHdcha() != null;
+    }
+    
+    public void eliminarUsuario(int key, NodoT pointer, NodoT previous) {
+        if (isEmpty()){
+            System.out.println("El árbol está vacío");
+        }else{
+            if (key < pointer.getKey()){
+                eliminarUsuario(key, pointer.getHizq(), pointer);
+            } else if (key > pointer.getKey()){
+                eliminarUsuario(key, pointer.getHdcha(), pointer);
+            }else{
+                if (pointer.esHoja()){
+                    if(previous == null){
+                        setRoot(null);
+                    }else{
+                        if (key < previous.getKey()){
+                            previous.setHizq(null);
+                        }else{
+                            previous.setHdcha(null);
+                        }
+                    }
+                }else if(pointer.soloHijodcho()){
+                    previous.setHdcha(pointer.getHdcha());
+                    pointer.setHdcha(null);
+                } else if(pointer.soloHijoizq()){
+                    previous.setHizq(pointer.getHizq());
+                    pointer.setHizq(null);
+                }else{
+                    boolean hijodcho = hijoIzq(pointer.getHizq());
+                    if (hijodcho){
+                        NodoT nodo = reemplazarNodo(pointer.getHizq());
+                        if(previous == null){
+                            nodo.setHizq(pointer.getHizq());
+                            nodo.setHdcha(pointer.getHdcha());
+                            setRoot(nodo);
+                        } else {
+                            if (key < previous.getKey()){
+                                nodo.setHizq(pointer.getHizq());
+                                nodo.setHdcha(pointer.getHdcha());
+                                previous.setHizq(nodo);
+                            }else{
+                                nodo.setHizq(pointer.getHizq());
+                                nodo.setHdcha(pointer.getHdcha());
+                                previous.setHizq(nodo);
+                            }
+                        }
+                    }else{
+                        NodoT nodo = pointer.getHizq();
+                        if(key < previous.getKey()){
+                            nodo.setHdcha(pointer.getHdcha());
+                            previous.setHizq(nodo);
+                        }else{
+                            nodo.setHizq(pointer.getHizq());
+                            previous.setHdcha(nodo);
+                        }
+                    }
+                    
+                }
+            }
+        
+        }
+    }
 }

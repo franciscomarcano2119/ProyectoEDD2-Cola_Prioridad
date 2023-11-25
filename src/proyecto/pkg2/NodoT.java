@@ -11,14 +11,16 @@ package proyecto.pkg2;
  */
 public class NodoT {
     public NodoT left, right, hizq, hdcha;
-    public Object element;
+    public String user;
     public int orden;
+    public int key;
 
-    public NodoT(Object element, int orden) {
+    public NodoT(String user, int orden, int key) {
         this.left = null;
         this.right = null;
-        this.element = element;
+        this.user = user;
         this.orden = orden;
+        this.key = key;
     }
 
     public NodoT getLeft() {
@@ -37,12 +39,12 @@ public class NodoT {
         this.right = right;
     }
 
-    public Object getElement() {
-        return element;
+    public Object getUser() {
+        return user;
     }
 
-    public void setElement(Object element) {
-        this.element = element;
+    public void setUser(String user) {
+        this.user = user;
     }
 
     public int getOrden() {
@@ -68,7 +70,28 @@ public class NodoT {
     public void setHdcha(NodoT hdcha) {
         this.hdcha = hdcha;
     }
+
+    public int getKey() {
+        return key;
+    }
+
+    public void setKey(int key) {
+        this.key = key;
+    }
     
+    public boolean esHoja() {
+        return hizq == null && hdcha == null;
+    }
     
+    public boolean soloHijodcho() {
+        return hizq == null && hdcha != null;
+    }
+    public boolean soloHijoizq() {
+        return hizq != null && hdcha == null;
+    }
+    
+    public boolean ambosHijos() {
+        return hizq != null && hdcha != null;
+    }
 }
     
