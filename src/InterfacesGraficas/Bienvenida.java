@@ -4,6 +4,10 @@
  */
 package InterfacesGraficas;
 
+import EDD.Cola;
+import org.graphstream.graph.Graph;
+import Funciones.FuncionCola;
+
 /**
  *
  * @author yaxim
@@ -16,6 +20,8 @@ public class Bienvenida extends javax.swing.JFrame {
     public Bienvenida() {
         initComponents();
     }
+    
+    FuncionCola funcionesCola = new FuncionCola();
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -37,7 +43,8 @@ public class Bienvenida extends javax.swing.JFrame {
         EliminarDocumento = new javax.swing.JButton();
         ColaImpresion = new javax.swing.JButton();
         AgregarUsuario = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -53,7 +60,7 @@ public class Bienvenida extends javax.swing.JFrame {
         jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, 320, 50));
 
         InciarSimulacion.setText("Iniciar Simulación");
-        jPanel2.add(InciarSimulacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 160, -1, -1));
+        jPanel2.add(InciarSimulacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, 180, -1));
 
         CargarArchivo.setText("Cargar Archivo");
         CargarArchivo.addActionListener(new java.awt.event.ActionListener() {
@@ -61,7 +68,7 @@ public class Bienvenida extends javax.swing.JFrame {
                 CargarArchivoActionPerformed(evt);
             }
         });
-        jPanel2.add(CargarArchivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 200, 120, -1));
+        jPanel2.add(CargarArchivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, 180, -1));
 
         EliminarUsuario.setText("Eliminar Usuarios");
         EliminarUsuario.addActionListener(new java.awt.event.ActionListener() {
@@ -69,7 +76,7 @@ public class Bienvenida extends javax.swing.JFrame {
                 EliminarUsuarioActionPerformed(evt);
             }
         });
-        jPanel2.add(EliminarUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 280, -1, -1));
+        jPanel2.add(EliminarUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 290, 180, -1));
 
         CrearDocumento.setText("Crear Documentos");
         CrearDocumento.addActionListener(new java.awt.event.ActionListener() {
@@ -77,7 +84,7 @@ public class Bienvenida extends javax.swing.JFrame {
                 CrearDocumentoActionPerformed(evt);
             }
         });
-        jPanel2.add(CrearDocumento, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 160, 140, -1));
+        jPanel2.add(CrearDocumento, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 170, 200, -1));
 
         AgregarDocumento.setText("Agregar Documentos");
         AgregarDocumento.addActionListener(new java.awt.event.ActionListener() {
@@ -85,7 +92,7 @@ public class Bienvenida extends javax.swing.JFrame {
                 AgregarDocumentoActionPerformed(evt);
             }
         });
-        jPanel2.add(AgregarDocumento, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 200, -1, -1));
+        jPanel2.add(AgregarDocumento, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 210, 200, -1));
 
         EliminarDocumento.setText("Eliminar Documentos");
         EliminarDocumento.addActionListener(new java.awt.event.ActionListener() {
@@ -93,10 +100,15 @@ public class Bienvenida extends javax.swing.JFrame {
                 EliminarDocumentoActionPerformed(evt);
             }
         });
-        jPanel2.add(EliminarDocumento, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 240, -1, -1));
+        jPanel2.add(EliminarDocumento, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 250, 200, -1));
 
         ColaImpresion.setText("Visualizar Cola de Impresión");
-        jPanel2.add(ColaImpresion, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 330, 200, -1));
+        ColaImpresion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ColaImpresionActionPerformed(evt);
+            }
+        });
+        jPanel2.add(ColaImpresion, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 330, 200, -1));
 
         AgregarUsuario.setText("Agregar Usuarios");
         AgregarUsuario.addActionListener(new java.awt.event.ActionListener() {
@@ -104,10 +116,13 @@ public class Bienvenida extends javax.swing.JFrame {
                 AgregarUsuarioActionPerformed(evt);
             }
         });
-        jPanel2.add(AgregarUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 240, -1, -1));
+        jPanel2.add(AgregarUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 250, 180, -1));
 
-        jButton2.setText("Desencolar");
-        jPanel2.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 280, 140, -1));
+        jButton1.setText("Lista Usurios y Documentos");
+        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 330, 180, -1));
+
+        jButton3.setText("Eliminar Documento Encolado");
+        jPanel2.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 290, 200, -1));
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 590, 400));
 
@@ -163,6 +178,13 @@ public class Bienvenida extends javax.swing.JFrame {
         deleteDocument.setLocationRelativeTo(null);
     }//GEN-LAST:event_EliminarDocumentoActionPerformed
 
+    private void ColaImpresionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ColaImpresionActionPerformed
+        // TODO add your handling code here:
+        Cola cola = funcionesCola.crearCola();
+        Graph dibujoCola = funcionesCola.drawColaImpresion(cola);
+        funcionesCola.viewCola(dibujoCola);
+    }//GEN-LAST:event_ColaImpresionActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -208,7 +230,8 @@ public class Bienvenida extends javax.swing.JFrame {
     private javax.swing.JButton EliminarDocumento;
     private javax.swing.JButton EliminarUsuario;
     private javax.swing.JButton InciarSimulacion;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

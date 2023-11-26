@@ -19,7 +19,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
-import proyecto.pkg2.CargarCSV;
+import EDD.CargarCSV;
 /**
  *
  * @author yaxim
@@ -149,12 +149,14 @@ public class CargarArchivo extends javax.swing.JFrame {
                 
                 String line = "";
                 String cvsSplitBy = ",";
-
-                ContenidoArchivo.append("Usuarios, Nivel de prioridad\n");
+                ContenidoArchivo.removeAll();
+                //ContenidoArchivo.append("Usuarios, Nivel de prioridad\n");
                 while ((line = br.readLine()) != null) {
-                    String[] data = line.split(cvsSplitBy);
-                    String usuarioTxt = data[0]+", "+data[1]+"\n";
-                    ContenidoArchivo.append(usuarioTxt);                
+                    if (!line.isEmpty()) {
+                        String[] data = line.split(cvsSplitBy);
+                        String usuarioTxt = data[0]+", "+data[1]+"\n";
+                        ContenidoArchivo.append(usuarioTxt);    
+                    }
                 }
                 ContenidoArchivo.append("\n"); 
    

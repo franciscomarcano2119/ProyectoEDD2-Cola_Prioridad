@@ -23,7 +23,7 @@ public class LeerArchivo {
     public String leertxt(String url){
 
         String line;  
-        String grafo_txt="";
+        String file_txt="";
         File file = new File(url);
         try{
             if (!file.exists()){
@@ -33,7 +33,7 @@ public class LeerArchivo {
                 BufferedReader br = new BufferedReader(fr);
                 while((line = br.readLine())!= null){
                     if (!line.isEmpty()){
-                        grafo_txt += line+ "\n";
+                        file_txt += line+ "\n";
                     } 
                 }
                 br.close();
@@ -43,6 +43,6 @@ public class LeerArchivo {
              JOptionPane.showMessageDialog(null, "Error");
         }
 
-        return grafo_txt;
+        return file_txt;
     }
 }

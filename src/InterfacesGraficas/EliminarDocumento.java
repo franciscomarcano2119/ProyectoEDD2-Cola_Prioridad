@@ -33,10 +33,9 @@ public class EliminarDocumento extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        Exit = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
+        Exit1 = new javax.swing.JButton();
+        ListaDocumentos = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -44,68 +43,62 @@ public class EliminarDocumento extends javax.swing.JFrame {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 106, -1, -1));
 
+        jPanel2.setBackground(new java.awt.Color(153, 153, 153));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Documento a Eliminar :");
-        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 60, 130, -1));
+        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 140, -1));
 
-        Exit.setText("Salir");
-        Exit.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ExitActionPerformed(evt);
-            }
-        });
-        jPanel2.add(Exit, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 180, -1, -1));
-
-        jButton1.setText("Buscar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 180, -1, -1));
-
+        jButton2.setBackground(new java.awt.Color(51, 51, 51));
+        jButton2.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
+        jButton2.setForeground(new java.awt.Color(255, 255, 255));
         jButton2.setText("Eliminar");
+        jButton2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 180, 80, -1));
-        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 500, 50));
+        jPanel2.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 110, 120, 30));
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 520, 240));
+        Exit1.setBackground(new java.awt.Color(102, 102, 102));
+        Exit1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        Exit1.setForeground(new java.awt.Color(255, 255, 255));
+        Exit1.setText("Salir");
+        Exit1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        Exit1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Exit1ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(Exit1, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 130, 60, 30));
+
+        ListaDocumentos.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel2.add(ListaDocumentos, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 70, 200, -1));
+
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 500, 200));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void ExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExitActionPerformed
-        // TODO add your handling code here:
-        this.dispose();
-    }//GEN-LAST:event_ExitActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        JFileChooser fileChooser = new JFileChooser();
-        fileChooser.showOpenDialog(null);
-        
-        File fName = fileChooser.getSelectedFile();
-        String f = fName.toString();
-        jLabel3.setText(f);
-        
-    }//GEN-LAST:event_jButton1ActionPerformed
-
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        File myObj = new File(jLabel3.getText()); 
-        if (myObj.delete()) { 
-            JOptionPane.showMessageDialog(null, " eliminado: " + myObj.getName());
-        } else {
-            JOptionPane.showMessageDialog(null, "No se pudo eliminar el documento: " + myObj.getName());
-        } 
-        
-        
+//        File myObj = new File(jLabel3.getText()); 
+//        if (myObj.delete()) { 
+//            JOptionPane.showMessageDialog(null, " eliminado: " + myObj.getName());
+//        } else {
+//            JOptionPane.showMessageDialog(null, "No se pudo eliminar el documento: " + myObj.getName());
+//        } 
+//        
+//        
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void Exit1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Exit1ActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_Exit1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -143,11 +136,10 @@ public class EliminarDocumento extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton Exit;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton Exit1;
+    private javax.swing.JComboBox<String> ListaDocumentos;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     // End of variables declaration//GEN-END:variables
