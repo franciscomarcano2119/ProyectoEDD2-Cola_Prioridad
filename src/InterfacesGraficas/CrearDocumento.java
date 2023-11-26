@@ -28,71 +28,99 @@ public class CrearDocumento extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        Exit = new javax.swing.JButton();
+        ListaUsuarios = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
         NombreDocumento = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         TipoDocumento = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        GuardarDocumento = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
+        Exit1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jPanel1.setBackground(new java.awt.Color(153, 153, 153));
+        jPanel1.setForeground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Nombre del Usuario  :");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 60, -1, -1));
 
-        jPanel1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 60, 240, -1));
-
-        Exit.setText("Salir");
-        Exit.addActionListener(new java.awt.event.ActionListener() {
+        ListaUsuarios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ExitActionPerformed(evt);
+                ListaUsuariosActionPerformed(evt);
             }
         });
-        jPanel1.add(Exit, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 240, -1, -1));
+        jPanel1.add(ListaUsuarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 60, 240, -1));
 
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Nombre del Documento : ");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, -1, -1));
-        jPanel1.add(NombreDocumento, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 100, 240, -1));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, -1, -1));
+        jPanel1.add(NombreDocumento, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 90, 240, -1));
 
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Tipo de Documento :");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 140, -1, -1));
-        jPanel1.add(TipoDocumento, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 140, 140, -1));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 120, -1, -1));
+        jPanel1.add(TipoDocumento, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 120, 180, -1));
 
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Tamaño del Documento : ");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, -1, -1));
-        jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 180, 140, -1));
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, -1, -1));
+        jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 150, 140, -1));
 
-        jButton1.setText("Guardar");
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 230, 100, 30));
+        GuardarDocumento.setBackground(new java.awt.Color(51, 51, 51));
+        GuardarDocumento.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
+        GuardarDocumento.setForeground(new java.awt.Color(255, 255, 255));
+        GuardarDocumento.setText("Guardar");
+        GuardarDocumento.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel1.add(GuardarDocumento, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 200, 100, 30));
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("#Numero de paginas");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 200, -1, -1));
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 170, -1, -1));
+
+        Exit1.setBackground(new java.awt.Color(102, 102, 102));
+        Exit1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        Exit1.setForeground(new java.awt.Color(255, 255, 255));
+        Exit1.setText("Salir");
+        Exit1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        Exit1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Exit1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(Exit1, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 220, 60, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 519, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 529, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 298, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 274, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void ExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExitActionPerformed
+    private void Exit1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Exit1ActionPerformed
         // TODO add your handling code here:
         this.dispose();
-    }//GEN-LAST:event_ExitActionPerformed
+    }//GEN-LAST:event_Exit1ActionPerformed
+
+    private void ListaUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ListaUsuariosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ListaUsuariosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -130,11 +158,11 @@ public class CrearDocumento extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton Exit;
+    private javax.swing.JButton Exit1;
+    private javax.swing.JButton GuardarDocumento;
+    private javax.swing.JComboBox<String> ListaUsuarios;
     private javax.swing.JTextField NombreDocumento;
     private javax.swing.JTextField TipoDocumento;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

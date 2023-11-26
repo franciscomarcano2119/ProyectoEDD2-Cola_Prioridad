@@ -10,33 +10,17 @@ package EDD;
  * @author casti
  */
 public class NodoT {
-    public NodoT left, right, hizq, hdcha;
+    public NodoT hizq, hdcha;
     public String user;
     public int orden;
     public int key;
 
     public NodoT(String user, int orden, int key) {
-        this.left = null;
-        this.right = null;
+        this.hizq = null;
+        this.hdcha = null;
         this.user = user;
         this.orden = orden;
         this.key = key;
-    }
-
-    public NodoT getLeft() {
-        return left;
-    }
-
-    public void setLeft(NodoT left) {
-        this.left = left;
-    }
-
-    public NodoT getRight() {
-        return right;
-    }
-
-    public void setRight(NodoT right) {
-        this.right = right;
     }
 
     public Object getUser() {

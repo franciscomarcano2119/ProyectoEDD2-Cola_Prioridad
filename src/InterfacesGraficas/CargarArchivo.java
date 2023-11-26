@@ -30,7 +30,7 @@ public class CargarArchivo extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTextArea2 = new javax.swing.JTextArea();
-        jButton1 = new javax.swing.JButton();
+        SeleccionarArchivo = new javax.swing.JButton();
         Exit = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         ContenidoArchivo = new javax.swing.JTextArea();
@@ -39,7 +39,7 @@ public class CargarArchivo extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
+        CargarCambios = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
 
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
@@ -48,30 +48,40 @@ public class CargarArchivo extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jPanel2.setBackground(new java.awt.Color(153, 153, 153));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jTextArea2.setColumns(20);
+        jTextArea2.setForeground(new java.awt.Color(255, 255, 255));
         jTextArea2.setRows(5);
         jTextArea2.setText("Usuario, Tipo\n\nuser_1 , prioridad_....\nuser_2 , prioridad_....\nuser_3 , prioridad_....\n\n");
         jScrollPane3.setViewportView(jTextArea2);
 
         jPanel2.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 170, -1, 120));
 
-        jButton1.setText("Seleccionar Archivo");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        SeleccionarArchivo.setBackground(new java.awt.Color(51, 51, 51));
+        SeleccionarArchivo.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        SeleccionarArchivo.setForeground(new java.awt.Color(255, 255, 255));
+        SeleccionarArchivo.setText("Seleccionar Archivo");
+        SeleccionarArchivo.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        SeleccionarArchivo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                SeleccionarArchivoActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, 180, 40));
+        jPanel2.add(SeleccionarArchivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, 180, 40));
 
+        Exit.setBackground(new java.awt.Color(102, 102, 102));
+        Exit.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        Exit.setForeground(new java.awt.Color(255, 255, 255));
         Exit.setText("Salir");
+        Exit.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         Exit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ExitActionPerformed(evt);
             }
         });
-        jPanel2.add(Exit, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 320, -1, -1));
+        jPanel2.add(Exit, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 320, 50, 20));
 
         ContenidoArchivo.setColumns(20);
         ContenidoArchivo.setRows(5);
@@ -80,27 +90,38 @@ public class CargarArchivo extends javax.swing.JFrame {
         jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 110, -1, 190));
 
         jTextArea1.setColumns(20);
+        jTextArea1.setForeground(new java.awt.Color(255, 255, 255));
         jTextArea1.setRows(5);
         jTextArea1.setText("El archivo a ingresar debe tener \nla siguiente estructura:");
         jScrollPane2.setViewportView(jTextArea1);
 
         jPanel2.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 120, -1, 90));
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(204, 204, 255));
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 2, 10)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Contenido del archivo seleccionado: ");
-        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 80, -1, -1));
+        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 90, -1, -1));
 
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("!!!RECORDATORIO!!!");
         jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 100, -1, -1));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 10)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("La prioridad debe ser : (baja , media o alta)");
         jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 290, -1, -1));
 
-        jButton2.setText("Cargar Cambios");
-        jPanel2.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 310, 150, 30));
+        CargarCambios.setBackground(new java.awt.Color(51, 51, 51));
+        CargarCambios.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        CargarCambios.setForeground(new java.awt.Color(255, 255, 255));
+        CargarCambios.setText("Cargar Cambios");
+        CargarCambios.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        CargarCambios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CargarCambiosActionPerformed(evt);
+            }
+        });
+        jPanel2.add(CargarCambios, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 310, 150, 30));
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 560, 390));
 
@@ -115,9 +136,13 @@ public class CargarArchivo extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_ExitActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void SeleccionarArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SeleccionarArchivoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_SeleccionarArchivoActionPerformed
+
+    private void CargarCambiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CargarCambiosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CargarCambiosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -155,10 +180,10 @@ public class CargarArchivo extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton CargarCambios;
     private javax.swing.JTextArea ContenidoArchivo;
     private javax.swing.JButton Exit;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton SeleccionarArchivo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

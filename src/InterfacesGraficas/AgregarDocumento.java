@@ -34,7 +34,7 @@ public class AgregarDocumento extends javax.swing.JFrame {
         NivelPrioridad = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
         Exit = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        AgregarDocumento = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -42,34 +42,48 @@ public class AgregarDocumento extends javax.swing.JFrame {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 106, -1, -1));
 
+        jPanel2.setBackground(new java.awt.Color(153, 153, 153));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel2.add(ListaDocumentos, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 60, 270, -1));
+        jPanel2.add(ListaDocumentos, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 60, 270, -1));
 
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Lista de Documentos:");
-        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 60, 120, 20));
+        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 60, 130, 20));
 
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Prioridad: ");
-        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 110, -1, -1));
+        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 100, -1, -1));
 
-        jPanel2.add(NivelPrioridad, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 110, 180, -1));
+        jPanel2.add(NivelPrioridad, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 100, 180, -1));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("!! El nivel de prioridad alterara su orden de impresion !!");
-        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 140, -1, -1));
+        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 130, -1, -1));
 
+        Exit.setBackground(new java.awt.Color(102, 102, 102));
+        Exit.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        Exit.setForeground(new java.awt.Color(255, 255, 255));
         Exit.setText("Salir");
+        Exit.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         Exit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ExitActionPerformed(evt);
             }
         });
-        jPanel2.add(Exit, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 190, -1, -1));
+        jPanel2.add(Exit, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 210, 50, 30));
 
-        jButton1.setText("Agregar Documento");
-        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 190, 150, -1));
+        AgregarDocumento.setBackground(new java.awt.Color(51, 51, 51));
+        AgregarDocumento.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
+        AgregarDocumento.setForeground(new java.awt.Color(255, 255, 255));
+        AgregarDocumento.setText("Agregar Documento");
+        AgregarDocumento.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel2.add(AgregarDocumento, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 180, 160, 30));
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 500, 270));
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 520, 260));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -115,10 +129,10 @@ public class AgregarDocumento extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton AgregarDocumento;
     private javax.swing.JButton Exit;
     private javax.swing.JComboBox<String> ListaDocumentos;
     private javax.swing.JComboBox<String> NivelPrioridad;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

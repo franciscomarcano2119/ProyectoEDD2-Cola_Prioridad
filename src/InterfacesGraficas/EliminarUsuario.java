@@ -6,7 +6,7 @@ package InterfacesGraficas;
 
 /**
  *
- * @author yaxim
+ * @author francisco
  */
 public class EliminarUsuario extends javax.swing.JFrame {
 
@@ -29,9 +29,9 @@ public class EliminarUsuario extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        ListaUsurios = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
-        Exit = new javax.swing.JButton();
+        Exit1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -39,33 +39,55 @@ public class EliminarUsuario extends javax.swing.JFrame {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(28, 106, -1, -1));
 
+        jPanel2.setBackground(new java.awt.Color(153, 153, 153));
+        jPanel2.setForeground(new java.awt.Color(153, 153, 153));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Usuario a Eliminar :");
-        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 50, 110, 20));
+        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 50, 120, 20));
 
-        jPanel2.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 50, 210, -1));
-
-        jButton1.setText("Eliminar");
-        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 100, 120, 30));
-
-        Exit.setText("Salir");
-        Exit.addActionListener(new java.awt.event.ActionListener() {
+        ListaUsurios.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        ListaUsurios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ExitActionPerformed(evt);
+                ListaUsuriosActionPerformed(evt);
             }
         });
-        jPanel2.add(Exit, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 160, -1, -1));
+        jPanel2.add(ListaUsurios, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 50, 210, -1));
+
+        jButton1.setBackground(new java.awt.Color(51, 51, 51));
+        jButton1.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
+        jButton1.setText("Eliminar");
+        jButton1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 90, 120, 30));
+
+        Exit1.setBackground(new java.awt.Color(102, 102, 102));
+        Exit1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        Exit1.setForeground(new java.awt.Color(255, 255, 255));
+        Exit1.setText("Salir");
+        Exit1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        Exit1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Exit1ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(Exit1, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 140, 60, 30));
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 480, 220));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void ExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExitActionPerformed
+    private void ListaUsuriosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ListaUsuriosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ListaUsuriosActionPerformed
+
+    private void Exit1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Exit1ActionPerformed
         // TODO add your handling code here:
         this.dispose();
-    }//GEN-LAST:event_ExitActionPerformed
+    }//GEN-LAST:event_Exit1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -103,9 +125,9 @@ public class EliminarUsuario extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton Exit;
+    private javax.swing.JButton Exit1;
+    private javax.swing.JComboBox<String> ListaUsurios;
     private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

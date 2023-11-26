@@ -114,8 +114,8 @@ public class FuncionBST {
 //        return nodo.getRightSon() != null;
 //    }
 //    
-      public BTree crearBST(){
-    
-        }
+//      public BTree crearBST(  ){
+//    
+//        }
 
 }
