@@ -3,7 +3,23 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package InterfacesGraficas;
-
+import Funciones.FunctionTXT;
+import Funciones.LeerArchivo;
+import com.opencsv.CSVReader;
+import com.opencsv.CSVReaderBuilder;
+import com.opencsv.exceptions.CsvException;
+import java.awt.BorderLayout;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.List;
+import javax.swing.JFileChooser;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import EDD.CargarCSV;
 /**
  *
  * @author yaxim
@@ -15,7 +31,9 @@ public class CargarArchivo extends javax.swing.JFrame {
      */
     public CargarArchivo() {
         initComponents();
-    }
+            }
+    FunctionTXT f = new FunctionTXT();
+    LeerArchivo content = new LeerArchivo();
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -111,6 +129,7 @@ public class CargarArchivo extends javax.swing.JFrame {
         jLabel4.setText("La prioridad debe ser : (baja , media o alta)");
         jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 290, -1, -1));
 
+
         CargarCambios.setBackground(new java.awt.Color(51, 51, 51));
         CargarCambios.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         CargarCambios.setForeground(new java.awt.Color(255, 255, 255));
@@ -122,6 +141,15 @@ public class CargarArchivo extends javax.swing.JFrame {
             }
         });
         jPanel2.add(CargarCambios, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 310, 150, 30));
+
+        jButton2.setText("Cargar Cambios");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 310, 150, 30));
+
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 560, 390));
 
@@ -136,13 +164,96 @@ public class CargarArchivo extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_ExitActionPerformed
 
+
     private void SeleccionarArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SeleccionarArchivoActionPerformed
         // TODO add your handling code here:
+        JFileChooser fileChooser = new JFileChooser();
+        int resultado = fileChooser.showOpenDialog(null);
+        if (resultado == JFileChooser.APPROVE_OPTION) {
+
+            File archivo = fileChooser.getSelectedFile();
+            try (BufferedReader br = new BufferedReader(new FileReader(archivo))){
+                
+                String line = "";
+                String cvsSplitBy = ",";
+
+                ContenidoArchivo.append("Usuarios, Nivel de prioridad\n");
+                while ((line = br.readLine()) != null) {
+                    String[] data = line.split(cvsSplitBy);
+                    String usuarioTxt = data[0]+", "+data[1]+"\n";
+                    ContenidoArchivo.append(usuarioTxt);                
+                }
+                ContenidoArchivo.append("\n"); 
+   
+                
+                
+            } catch (IOException ex) {
+               
+            }
+            
+                
+        }
+    }   
     }//GEN-LAST:event_SeleccionarArchivoActionPerformed
 
     private void CargarCambiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CargarCambiosActionPerformed
         // TODO add your handling code here:
+
+        int response = JOptionPane.showConfirmDialog(this, "¿Esta seguro que desea guardar los nuevos datos? Se reemplazara la base de datos existente en el sistema");
+        if (response == JOptionPane.YES_OPTION) {
+            String contenidoFile = ContenidoArchivo.getText();
+            if (!f.validarCSVFile(contenidoFile)){
+                JOptionPane.showMessageDialog(null, "El contenido del archivo no cumple con la estructura requerida\nPor favor intentelo de nuevo");
+            } else{
+                f.escribir_txt(contenidoFile);
+                JOptionPane.showMessageDialog(null, "Guardado exitoso");
+            }
+        }
     }//GEN-LAST:event_CargarCambiosActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+
+//        JFileChooser fileChooser = new JFileChooser();
+//        int resultado = fileChooser.showOpenDialog(null);
+//        if (resultado == JFileChooser.APPROVE_OPTION) {
+//
+//            File archivo = fileChooser.getSelectedFile();
+//            try (BufferedReader br = new BufferedReader(new FileReader(archivo))){
+//                
+//                String line = "";
+//                String cvsSplitBy = ",";
+//
+//                ContenidoArchivo.append("Usuarios, Nivel de prioridad\n");
+//                while ((line = br.readLine()) != null) {
+//                    String[] data = line.split(cvsSplitBy);
+//                    String usuarioTxt = data[0]+", "+data[1]+"\n";
+//                    ContenidoArchivo.append(usuarioTxt);                
+//                }
+//                ContenidoArchivo.append("\n"); 
+//   
+//                
+//                
+//            } catch (IOException ex) {
+//               
+//            }
+//            
+//                
+//        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+//        int response = JOptionPane.showConfirmDialog(this, "¿Esta seguro que desea guardar los nuevos datos? Se reemplazara la base de datos existente en el sistema");
+//        if (response == JOptionPane.YES_OPTION) {
+//            String contenidoFile = ContenidoArchivo.getText();
+//            if (!f.validarCSVFile(contenidoFile)){
+//                JOptionPane.showMessageDialog(null, "El contenido del archivo no cumple con la estructura requerida\nPor favor intentelo de nuevo");
+//            } else{
+//                f.escribir_txt(contenidoFile);
+//                JOptionPane.showMessageDialog(null, "Guardado exitoso");
+//            }
+//        }
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments

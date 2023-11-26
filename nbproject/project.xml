@@ -3,15 +3,7 @@
     <type>org.netbeans.modules.java.j2seproject</type>
     <configuration>
         <data xmlns="http://www.netbeans.org/ns/j2se-project/3">
-<<<<<<< HEAD
-<<<<<<< HEAD
             <name>ProyectoEDD_2_ColaPrioridad</name>
-=======
-            <name>Proyecto 2</name>
->>>>>>> adolfo
-=======
-<name>ProyectoEDD_2_ColaPrioridad</name>
->>>>>>> adolfo
             <source-roots>
                 <root id="src.dir"/>
             </source-roots>
