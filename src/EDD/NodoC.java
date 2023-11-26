@@ -11,23 +11,52 @@ package EDD;
  */
 public class NodoC {
     private Object dato;
+    private Documento documento;
     private NodoC siguiente;
 
     public NodoC(Object dato) {
         this.dato = dato;
         this.siguiente = null;
     }
+    
+    public NodoC(Documento documento) {
+        this.documento = documento;
+        this.siguiente = null;
+    }
 
     public Object getDato() {
         return dato;
+    }
+    
+     public Documento getDocumento() {
+        return documento;
     }
 
     public void setDato(Object dato) {
         this.dato = dato;
     }
+    
+     public void setDocumento(Documento documento) {
+        this.documento = documento;
+    }
 
     public NodoC getSiguiente() {
         return siguiente;
+    }
+    
+    public NodoC getAnterior(NodoC primero, NodoC nodoSiguiente) {
+        NodoC nodoActual = primero;
+        NodoC nodoAnterior = null;
+        while(nodoActual.getSiguiente() != null) {
+        
+            if (nodoActual != null && nodoActual.getSiguiente() == nodoSiguiente)  {
+                nodoAnterior = nodoActual;
+            }          
+    
+            nodoActual = nodoActual.getSiguiente();
+        }       
+
+        return nodoAnterior;
     }
 
     public void setSiguiente(NodoC siguiente) {

@@ -5,6 +5,8 @@
  */
 package Funciones;
 
+import EDD.Documento;
+import EDD.Usuario;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -18,6 +20,8 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -88,11 +92,58 @@ public class FunctionTXT {
     }
     
     
-    public String[] getUsuarios (String content){
-        String[] separar = content.split(",");
-        String usuarios = separar [0];
-        String[] users = usuarios.split("\n");
-        return users;
+    public List<Usuario> getUsuarios (String content){
+        //String[] separar = content.split(",");
+        //String usuarios = separar [0];
+        String[] usersList = content.split("\n");
+        List<Usuario> usuarios = new ArrayList();
+        Usuario usuario;
+        String[] fields;
+        for (String item : usersList) {
+            fields = item.split(",");
+            usuario = new Usuario();
+            usuario.nombre = fields[0];
+            usuario.prioridad = Integer.parseInt(fields[1].trim());
+            usuario.documentos = new ArrayList();
+            usuarios.add(usuario);
+        }
+        
+        
+        return usuarios;
+    }
+    
+    
+    public List<Usuario> addDocumentosUsuario (List<Usuario> usuarios, String content){
+        
+        String[] listaDocumentos = content.split("\n");
+        String[] fields;
+        Documento documento;
+        String nombreusuario;
+        Usuario usuario;
+        for (String item : listaDocumentos) {
+            fields = item.split(",");
+            
+            nombreusuario = fields[0];
+            usuario = getUsuarioPorNombre(usuarios, nombreusuario);
+            if (usuario != null) {
+                documento = new Documento();
+                documento.nombre = fields[1];
+                documento.type = fields[2];
+                documento.size = Integer.parseInt(fields[3].trim());
+                usuario.documentos.add(documento);
+            }
+        }
+        
+        return usuarios;
+    }
+    
+    public Usuario getUsuarioPorNombre(List<Usuario> usuarios, String nombreusuario){
+        for(Usuario usuario : usuarios) {
+            if (usuario.nombre.trim().equalsIgnoreCase(nombreusuario.trim())){
+                return usuario;
+            }
+        }
+        return null;
     }
     
     /**
@@ -115,7 +166,7 @@ public class FunctionTXT {
     public void escribir_txt(String contenido){
         
         try{
-            PrintWriter pw = new PrintWriter("src\\proyecto\\pkg2\\doc_prueba.csv");
+            PrintWriter pw = new PrintWriter("src\\Files\\usuarios.csv");
             pw.write(contenido);
             
             pw.close();
@@ -129,7 +180,7 @@ public class FunctionTXT {
     public void modificarUsuarioRelacion (int id1, int id2, String username1, String username2, int years){
         
         LeerArchivo read = new LeerArchivo();
-        String document = read.leertxt("src\\proyecto\\pkg2\\doc_prueba.csv");
+        String document = read.leertxt("src\\Files\\usuarios.csv");
         String[] info = document.split(",");
         String users = info[0];
 
@@ -144,7 +195,7 @@ public class FunctionTXT {
     
     public void agregarRelacion(int id1, int id2, int years){
         LeerArchivo read = new LeerArchivo();
-        String document = read.leertxt("src\\proyecto\\pkg2\\doc_prueba.csv");
+        String document = read.leertxt("src\\Files\\usuarios.csv");
         String[] info = document.split(",");
         String users = info[0];
 
@@ -164,7 +215,7 @@ public class FunctionTXT {
     
     public void agregarUser (String username, int id){
         LeerArchivo read = new LeerArchivo();
-        String document = read.leertxt("src\\proyecto\\pkg2\\doc_prueba.csv");
+        String document = read.leertxt("src\\Files\\usuarios.csv");
         String[] info = document.split(",");
         String users = info[0];
         String relations = info[1];

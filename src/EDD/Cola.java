@@ -14,8 +14,8 @@ public class Cola {
     private NodoC ultimo;
 
     public Cola() {
-        primero = null;
-        ultimo = null;
+        this.primero = null;
+        this.ultimo = null;
     }
 
     public boolean isEmpty() {
@@ -24,6 +24,18 @@ public class Cola {
 
     public void encolar(Object dato) {
         NodoC nuevo = new NodoC(dato);
+
+        if (isEmpty()) {
+            primero = nuevo;
+            ultimo = nuevo;
+        } else {
+            ultimo.setSiguiente(nuevo);
+            ultimo = nuevo;
+        }
+    }
+    
+    public void encolarDocumento(Documento documento) {
+        NodoC nuevo = new NodoC(documento);
 
         if (isEmpty()) {
             primero = nuevo;
@@ -48,6 +60,38 @@ public class Cola {
         }
 
         return dato;
+    }
+    
+    public Documento desencolarDocumento() {
+        if (isEmpty()) {
+            return null;
+        }
+
+        Documento documento = primero.getDocumento();
+
+        primero = primero.getSiguiente();
+
+        if (primero == null) {
+            ultimo = null;
+        }
+
+        return documento;
+    }
+    
+    public NodoC obtenerPrimerNodo() {
+        if (isEmpty()) {
+            return null;
+        }
+
+        return primero;
+    }
+    
+    public NodoC obtenerUltimoNodo() {
+        if (isEmpty()) {
+            return null;
+        }
+
+        return ultimo;
     }
 
     public Object obtenerPrimero() {

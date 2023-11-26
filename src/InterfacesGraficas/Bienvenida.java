@@ -4,6 +4,10 @@
  */
 package InterfacesGraficas;
 
+import EDD.Cola;
+import org.graphstream.graph.Graph;
+import Funciones.FuncionCola;
+
 /**
  *
  * @author yaxim
@@ -16,6 +20,8 @@ public class Bienvenida extends javax.swing.JFrame {
     public Bienvenida() {
         initComponents();
     }
+    
+    FuncionCola funcionesCola = new FuncionCola();
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -97,6 +103,11 @@ public class Bienvenida extends javax.swing.JFrame {
         jPanel2.add(EliminarDocumento, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 250, 200, -1));
 
         ColaImpresion.setText("Visualizar Cola de Impresión");
+        ColaImpresion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ColaImpresionActionPerformed(evt);
+            }
+        });
         jPanel2.add(ColaImpresion, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 330, 200, -1));
 
         AgregarUsuario.setText("Agregar Usuarios");
@@ -166,6 +177,13 @@ public class Bienvenida extends javax.swing.JFrame {
         deleteDocument.setVisible(true);
         deleteDocument.setLocationRelativeTo(null);
     }//GEN-LAST:event_EliminarDocumentoActionPerformed
+
+    private void ColaImpresionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ColaImpresionActionPerformed
+        // TODO add your handling code here:
+        Cola cola = funcionesCola.crearCola();
+        Graph dibujoCola = funcionesCola.drawColaImpresion(cola);
+        funcionesCola.viewCola(dibujoCola);
+    }//GEN-LAST:event_ColaImpresionActionPerformed
 
     /**
      * @param args the command line arguments
