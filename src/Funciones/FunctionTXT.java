@@ -5,8 +5,10 @@
  */
 package Funciones;
 
+import EDD.BTree;
 import EDD.Documento;
 import EDD.DocumentoEncolado;
+import EDD.NodoT;
 import EDD.Usuario;
 import java.io.BufferedReader;
 import java.io.File;
@@ -151,6 +153,14 @@ public class FunctionTXT {
         }
         
         return documentosEncolados;
+    }
+    
+    public BTree getArbolDocumentoEncolados(List<DocumentoEncolado> documentosEncolados, BTree arbolDocumentoEncolados) {
+        NodoT root = arbolDocumentoEncolados.getRoot();
+        for (DocumentoEncolado documentoEncolado: documentosEncolados){
+           root = arbolDocumentoEncolados.insertNodo(documentoEncolado, root);
+        }
+        return arbolDocumentoEncolados;
     }
     
     public Usuario getUsuarioPorNombre(List<Usuario> usuarios, String nombreusuario){

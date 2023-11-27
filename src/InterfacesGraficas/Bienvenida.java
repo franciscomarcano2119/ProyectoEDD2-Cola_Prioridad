@@ -5,6 +5,7 @@
 package InterfacesGraficas;
 
 import EDD.Cola;
+import Funciones.FuncionBST;
 import org.graphstream.graph.Graph;
 import Funciones.FuncionCola;
 import java.text.DateFormat;
@@ -13,6 +14,7 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 import javax.swing.JOptionPane;
+import static proyectoedd_2_colaprioridad.Main.arbolDocumentoEncolados;
 import static proyectoedd_2_colaprioridad.Main.tiempoInicioSimulacion;
 
 /**
@@ -29,6 +31,7 @@ public class Bienvenida extends javax.swing.JFrame {
     }
     
     FuncionCola funcionesCola = new FuncionCola();
+    FuncionBST funcionesBTree = new FuncionBST();
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -52,6 +55,7 @@ public class Bienvenida extends javax.swing.JFrame {
         AgregarUsuario = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        ArbolImpresion = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -175,6 +179,18 @@ public class Bienvenida extends javax.swing.JFrame {
         jButton3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel2.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 290, 200, -1));
 
+        ArbolImpresion.setBackground(new java.awt.Color(51, 51, 51));
+        ArbolImpresion.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
+        ArbolImpresion.setForeground(new java.awt.Color(255, 255, 255));
+        ArbolImpresion.setText("Visualizar Arbol de Impresión");
+        ArbolImpresion.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        ArbolImpresion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ArbolImpresionActionPerformed(evt);
+            }
+        });
+        jPanel2.add(ArbolImpresion, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 370, 200, 20));
+
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 590, 400));
 
         pack();
@@ -231,7 +247,7 @@ public class Bienvenida extends javax.swing.JFrame {
 
     private void ColaImpresionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ColaImpresionActionPerformed
         // TODO add your handling code here:
-        Cola cola = funcionesCola.crearCola();
+        Cola cola = funcionesCola.crearCola(arbolDocumentoEncolados);
         Graph dibujoCola = funcionesCola.drawColaImpresion(cola);
         funcionesCola.viewCola(dibujoCola);
     }//GEN-LAST:event_ColaImpresionActionPerformed
@@ -245,6 +261,13 @@ public class Bienvenida extends javax.swing.JFrame {
         
         JOptionPane.showMessageDialog(null, "Iniciando simulación: " + tiempoInicioSimulacion.toString());
     }//GEN-LAST:event_InciarSimulacionActionPerformed
+
+    private void ArbolImpresionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ArbolImpresionActionPerformed
+        // TODO add your handling code here:
+        
+        Graph dibujoArbol = funcionesBTree.drawArbolImpresion(arbolDocumentoEncolados);
+        funcionesBTree.viewArbol(dibujoArbol);
+    }//GEN-LAST:event_ArbolImpresionActionPerformed
 
     /**
      * @param args the command line arguments
@@ -285,6 +308,7 @@ public class Bienvenida extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AgregarDocumento;
     private javax.swing.JButton AgregarUsuario;
+    private javax.swing.JButton ArbolImpresion;
     private javax.swing.JButton CargarArchivo;
     private javax.swing.JButton ColaImpresion;
     private javax.swing.JButton CrearDocumento;

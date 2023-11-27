@@ -11,7 +11,7 @@ package EDD;
  */
 public class NodoC {
     private Object dato;
-    private Documento documento;
+    private DocumentoEncolado documento;
     private NodoC siguiente;
 
     public NodoC(Object dato) {
@@ -19,7 +19,7 @@ public class NodoC {
         this.siguiente = null;
     }
     
-    public NodoC(Documento documento) {
+    public NodoC(DocumentoEncolado documento) {
         this.documento = documento;
         this.siguiente = null;
     }
@@ -28,7 +28,7 @@ public class NodoC {
         return dato;
     }
     
-     public Documento getDocumento() {
+     public DocumentoEncolado getDocumento() {
         return documento;
     }
 
@@ -36,7 +36,7 @@ public class NodoC {
         this.dato = dato;
     }
     
-     public void setDocumento(Documento documento) {
+     public void setDocumento(DocumentoEncolado documento) {
         this.documento = documento;
     }
 

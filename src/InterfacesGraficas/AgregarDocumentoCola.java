@@ -5,6 +5,8 @@
 package InterfacesGraficas;
 
 import EDD.Documento;
+import EDD.DocumentoEncolado;
+import EDD.NodoT;
 import EDD.Usuario;
 import Funciones.FunctionTXT;
 import Funciones.LeerArchivo;
@@ -12,6 +14,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
+import static proyectoedd_2_colaprioridad.Main.arbolDocumentoEncolados;
 import static proyectoedd_2_colaprioridad.Main.tiempoInicioSimulacion;
 import static proyectoedd_2_colaprioridad.Main.usuarios;
 
@@ -150,8 +153,15 @@ public class AgregarDocumentoCola extends javax.swing.JFrame {
         Usuario usuarioSeleccionado = getUsuarioSeleccionado(usuarios, selectedUsuarioItem.toString());
         Documento documentoSeleccionado = getDocumentoSeleccionado(usuarioSeleccionado, selectedDocumentoItem.toString());
         int tiempo = CalcularTiempo(usuarioSeleccionado.prioridad);
-        //arbolDocumentoEncolados = 
-        AgregarDocumentoArchivo(documentoSeleccionado.nombre, tiempo, documentoSeleccionado.size);
+        DocumentoEncolado documentoEncolado = new DocumentoEncolado();
+        documentoEncolado.nombre = documentoSeleccionado.nombre;
+        documentoEncolado.size = documentoSeleccionado.size;
+        documentoEncolado.tiempo = tiempo;
+        NodoT root = arbolDocumentoEncolados.getRoot();
+        arbolDocumentoEncolados.insertNodo(documentoEncolado, root);
+        AgregarDocumentoArchivo(documentoSeleccionado.nombre.trim(), tiempo, documentoSeleccionado.size);
+        
+        JOptionPane.showMessageDialog(null, "Documento Agregado a la Cola exitosamente ");
     }//GEN-LAST:event_AgregarDocumentoActionPerformed
 
     /**
@@ -242,13 +252,27 @@ public class AgregarDocumentoCola extends javax.swing.JFrame {
     
     private int CalcularTiempo(int prioridad) {
         int tiempo = 60; // 1 min en segundos
+        switch(prioridad) {
+            case 1: tiempo = tiempo / 5;
+                    break;
+            case 2: tiempo = tiempo;
+                    break;
+            case 3: tiempo = tiempo * 2;
+                    break;
+            default: break;
+                     
+        }
         Calendar calendar = Calendar.getInstance();
         Date currentTime = calendar.getTime();
         
+        if (tiempoInicioSimulacion == null) {
+            tiempoInicioSimulacion = calendar.getTime();
+        } 
+        
         long diffTime =  currentTime.getTime() - tiempoInicioSimulacion.getTime();
-        long result = diffTime/1000;
+        long result = diffTime/10000;
         int diffSec = Long.valueOf(result).intValue();
-        return ((tiempo*prioridad)+diffSec);
+        return (tiempo+diffSec);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

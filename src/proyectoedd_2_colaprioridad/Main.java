@@ -33,12 +33,14 @@ public class Main {
         
         LeerArchivo f = new LeerArchivo();
         FunctionTXT content = new FunctionTXT();
+        arbolDocumentoEncolados = new BTree();
         String listaUsuarios = f.leertxt("src\\Files\\usuarios.csv");
         String listDocumentos = f.leertxt("src\\Files\\documentos.csv");
         String listDocumentosEncolados = f.leertxt("src\\Files\\documentosEncolados.csv");
         usuarios = content.getUsuarios(listaUsuarios);
         usuarios = content.addDocumentosUsuario(usuarios, listDocumentos);
         documentoEncolados = content.getDocumentosEncolados(listDocumentosEncolados);
+        arbolDocumentoEncolados = content.getArbolDocumentoEncolados(documentoEncolados, arbolDocumentoEncolados);
         
         
         Bienvenida window = new Bienvenida();

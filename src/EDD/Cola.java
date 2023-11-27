@@ -34,7 +34,7 @@ public class Cola {
         }
     }
     
-    public void encolarDocumento(Documento documento) {
+    public void encolarDocumento(DocumentoEncolado documento) {
         NodoC nuevo = new NodoC(documento);
 
         if (isEmpty()) {
@@ -62,12 +62,12 @@ public class Cola {
         return dato;
     }
     
-    public Documento desencolarDocumento() {
+    public DocumentoEncolado desencolarDocumento() {
         if (isEmpty()) {
             return null;
         }
 
-        Documento documento = primero.getDocumento();
+        DocumentoEncolado documento = primero.getDocumento();
 
         primero = primero.getSiguiente();
 
