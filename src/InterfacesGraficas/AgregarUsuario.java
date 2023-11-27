@@ -110,6 +110,7 @@ public class AgregarUsuario extends javax.swing.JFrame {
 
     private void AgregarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AgregarUsuarioActionPerformed
         // TODO add your handling code here:
+        String nombre = jTextField1.getText();
     }//GEN-LAST:event_AgregarUsuarioActionPerformed
 
     /**

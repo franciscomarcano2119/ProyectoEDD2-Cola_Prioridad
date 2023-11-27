@@ -4,10 +4,14 @@
  */
 package proyectoedd_2_colaprioridad;
 
+import EDD.BTree;
+import EDD.DocumentoEncolado;
 import EDD.Usuario;
 import Funciones.FunctionTXT;
 import Funciones.LeerArchivo;
 import InterfacesGraficas.Bienvenida;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -17,6 +21,9 @@ import java.util.List;
 public class Main {
     
     public static List<Usuario> usuarios;
+    public static List<DocumentoEncolado> documentoEncolados;
+    public static Date tiempoInicioSimulacion;
+    public static BTree arbolDocumentoEncolados;
 
     /**
      * @param args the command line arguments
@@ -28,8 +35,10 @@ public class Main {
         FunctionTXT content = new FunctionTXT();
         String listaUsuarios = f.leertxt("src\\Files\\usuarios.csv");
         String listDocumentos = f.leertxt("src\\Files\\documentos.csv");
+        String listDocumentosEncolados = f.leertxt("src\\Files\\documentosEncolados.csv");
         usuarios = content.getUsuarios(listaUsuarios);
         usuarios = content.addDocumentosUsuario(usuarios, listDocumentos);
+        documentoEncolados = content.getDocumentosEncolados(listDocumentosEncolados);
         
         
         Bienvenida window = new Bienvenida();

@@ -6,6 +6,7 @@
 package Funciones;
 
 import EDD.Documento;
+import EDD.DocumentoEncolado;
 import EDD.Usuario;
 import java.io.BufferedReader;
 import java.io.File;
@@ -93,8 +94,7 @@ public class FunctionTXT {
     
     
     public List<Usuario> getUsuarios (String content){
-        //String[] separar = content.split(",");
-        //String usuarios = separar [0];
+
         String[] usersList = content.split("\n");
         List<Usuario> usuarios = new ArrayList();
         Usuario usuario;
@@ -107,8 +107,7 @@ public class FunctionTXT {
             usuario.documentos = new ArrayList();
             usuarios.add(usuario);
         }
-        
-        
+         
         return usuarios;
     }
     
@@ -135,6 +134,23 @@ public class FunctionTXT {
         }
         
         return usuarios;
+    }
+    
+    public List<DocumentoEncolado> getDocumentosEncolados(String content) {
+        String[] usersList = content.split("\n");
+        List<DocumentoEncolado> documentosEncolados = new ArrayList();
+        DocumentoEncolado documentoEncolado;
+        String[] fields;
+        for (String item : usersList) {
+            fields = item.split(",");
+            documentoEncolado = new DocumentoEncolado();
+            documentoEncolado.nombre = fields[0];
+            documentoEncolado.tiempo = Integer.parseInt(fields[1].trim());
+            documentoEncolado.size = Integer.parseInt(fields[2].trim());
+            documentosEncolados.add(documentoEncolado);
+        }
+        
+        return documentosEncolados;
     }
     
     public Usuario getUsuarioPorNombre(List<Usuario> usuarios, String nombreusuario){
@@ -167,6 +183,20 @@ public class FunctionTXT {
         
         try{
             PrintWriter pw = new PrintWriter("src\\Files\\usuarios.csv");
+            pw.write(contenido);
+            
+            pw.close();
+//            JOptionPane.showMessageDialog(null, "Guardado exitoso");
+            
+        }catch(Exception err){
+            JOptionPane.showMessageDialog(null, err);
+        }
+    }
+    
+     public void escribir_documentosEncolados(String contenido){
+        
+        try{
+            PrintWriter pw = new PrintWriter("src\\Files\\documentosEncolados.csv");
             pw.write(contenido);
             
             pw.close();

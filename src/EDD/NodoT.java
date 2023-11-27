@@ -14,6 +14,8 @@ public class NodoT {
     public String user;
     public int orden;
     public int key;
+    public Documento documento;
+    public int tiempo;
 
     public NodoT(String user, int orden, int key) {
         this.hizq = null;
