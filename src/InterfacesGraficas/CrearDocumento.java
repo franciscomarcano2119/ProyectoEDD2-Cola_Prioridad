@@ -6,7 +6,7 @@ package InterfacesGraficas;
 
 /**
  *
- * @author yaxim
+ * @author francisco
  */
 public class CrearDocumento extends javax.swing.JFrame {
 

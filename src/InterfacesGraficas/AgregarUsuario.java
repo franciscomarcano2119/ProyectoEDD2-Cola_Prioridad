@@ -4,19 +4,46 @@
  */
 package InterfacesGraficas;
 
+import EDD.Usuario;
+import Funciones.FunctionTXT;
+import Funciones.LeerArchivo;
+import java.awt.BorderLayout;
+import java.awt.FlowLayout;
+import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+
 /**
  *
- * @author yaxim
+ * @author francisco
  */
 public class AgregarUsuario extends javax.swing.JFrame {
 
     /**
      * Creates new form AgregarUsuario
      */
+    private JComboBox priorityList;
+    private JButton submitButton;
+    private String[] priorities = {"Baja", "Media", "Alta"};
+    
     public AgregarUsuario() {
         initComponents();
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -63,6 +90,12 @@ public class AgregarUsuario extends javax.swing.JFrame {
         jLabel2.setText("Tipo :");
         jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 100, 40, -1));
 
+        ListaPrioridades.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Prioridad Alta", "Prioridad Media", "Prioridad Baja" }));
+        ListaPrioridades.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ListaPrioridadesActionPerformed(evt);
+            }
+        });
         jPanel2.add(ListaPrioridades, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 100, 180, -1));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
@@ -107,10 +140,67 @@ public class AgregarUsuario extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_ExitActionPerformed
+    private boolean validarUser(String[] users, String userId, String userName) {
+            try{
+                Integer.parseInt(userId);
+                if (userName.trim().charAt(0) != '@'){
+                    return false;     
+                }
 
+                for (int i = 1; i < users.length; i++) {
+                   String[] info = users[i].trim().split(",");
+                   String username = info[1].trim();
+                   String id = info[0].trim();  
+                   if (Integer.parseInt(id) == Integer.parseInt(userId)) {
+                       return false;
+                   }
+                   if (userName == username) {
+                       return false;
+                   }  
+                }
+
+            }catch(Exception e){
+                return false;
+            }
+            return true;
+        }
     private void AgregarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AgregarUsuarioActionPerformed
+
         // TODO add your handling code here:
+        String nombre = jTextField1.getText();
+
+        String valorSeleccionado = (String) ListaPrioridades.getSelectedItem();
+        int prioridad = 3;
+        if ("Prioridad Alta".equals(valorSeleccionado)){
+            prioridad = 1;
+        }
+        if ("Prioridad Media".equals(valorSeleccionado)){
+            prioridad = 2;
+        }
+        if ("Prioridad Baja".equals(valorSeleccionado)){
+            prioridad = 3;
+        }
+        
+        AgregarUsuarioArchivo(nombre, prioridad);
+        
+        JOptionPane.showMessageDialog(null, "Usuario Agregado exitosamente! ");
+       
     }//GEN-LAST:event_AgregarUsuarioActionPerformed
+
+    private void AgregarUsuarioArchivo(String nombreUsuario, int prioridad) {
+        // TODO add your handling code here:
+        LeerArchivo f = new LeerArchivo();
+        FunctionTXT content = new FunctionTXT();
+        String listaUsuarios = f.leertxt("src\\Files\\usuarios.csv");
+        String usuarioNuevo = nombreUsuario + ", " + Integer.toString(prioridad);
+        listaUsuarios += usuarioNuevo + "\n";      
+        
+        content.escribir_txt(listaUsuarios);
+    }
+
+    private void ListaPrioridadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ListaPrioridadesActionPerformed
+
+    }//GEN-LAST:event_ListaPrioridadesActionPerformed
 
     /**
      * @param args the command line arguments

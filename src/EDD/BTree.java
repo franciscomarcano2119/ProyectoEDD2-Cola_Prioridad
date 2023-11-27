@@ -13,6 +13,9 @@ public class BTree {
     private Object dato;
     private NodoT root;
 
+    public BTree() {
+       this.root = null;
+    }
     
     public BTree(Object dato) {
         this.dato = dato;
@@ -53,6 +56,29 @@ public class BTree {
         } else {
             return buscarNodo(nodo.getHdcha(), dato);
         }
+    }
+    
+    public NodoT insertNodo(DocumentoEncolado documento, NodoT pointer){
+        NodoT nodo = new NodoT(documento);
+        if (isEmpty()) {
+            setRoot(nodo);
+        } else{
+            if(documento.tiempo < pointer.getTiempo()){
+                if(pointer.getHizq() == null){
+                    pointer.setHizq(nodo);
+                }else{
+                    insertNodo (documento, pointer.getHizq());
+                }
+            }
+            if(documento.tiempo > pointer.getTiempo()){
+                if(pointer.getHdcha() == null){
+                    pointer.setHdcha(nodo);
+                }else{
+                    insertNodo (documento, pointer.getHdcha());
+                }
+            }
+        }
+        return getRoot();
     }
     
     public void insertarUsuario (int key, int orden, String user, NodoT pointer){

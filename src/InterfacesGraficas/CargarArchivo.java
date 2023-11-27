@@ -22,7 +22,7 @@ import javax.swing.JTextArea;
 import EDD.CargarCSV;
 /**
  *
- * @author yaxim
+ * @author francisco
  */
 public class CargarArchivo extends javax.swing.JFrame {
 

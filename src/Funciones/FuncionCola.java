@@ -4,9 +4,12 @@
  */
 package Funciones;
 
+import EDD.BTree;
 import EDD.Cola;
 import EDD.Documento;
+import EDD.DocumentoEncolado;
 import EDD.NodoC;
+import EDD.NodoT;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
@@ -22,7 +25,7 @@ import org.graphstream.ui.view.Viewer;
 
 /**
  *
- * @author yaxim
+ * @author francisco
  */
 public class FuncionCola {
 //    Grafo grafoAux = new Grafo();
@@ -119,39 +122,47 @@ public class FuncionCola {
                 graph.addEdge(nodoActual.getDocumento().nombre, nodoActual.getDocumento().nombre, nodoAnterior.getDocumento().nombre, true);
             nodoActual = nodoAnterior;
         }
-        //graph.addNode(nodoActual.getDocumento().nombre).setAttribute("ui.label",nodoActual.getDocumento().nombre); 
         
-//        for (int i=0;i<grafo.getUsuarios().size();i++){
-//            Vertice user = grafo.getUsuarios().get(i);
-//            String userid = user.getNombre();
-//            graph.addNode(userid).setAttribute("ui.label",userid);
-//        }
-//        // Se recorre la lista de adyacencia de nuestro grafo para añadir los arcos y pesos al grafo de GraphStream
-//        for (int i=0; i < grafo.getUsuarios().size(); i++){
-//            Vertice friend1 = grafo.getUsuarios().get(i);
-//            for (int j=0; j<friend1.getConexions().size(); j++){
-//                Arista friend2 = friend1.getConexions().get(j);
-//                String id = friend1.getNombre() + friend2.getEnd().getNombre();
-//                graph.addEdge(id, friend1.getNombre(), friend2.getEnd().getNombre(), false);
-//            }
-//        } 
         return graph;
     }
     
-    public Cola crearCola() {
+    public Cola crearCola(BTree arbol) {
         Cola cola = new Cola();
-        cola.encolarDocumento(CrearDocumento("Doc1", 1, "Type1"));
-        cola.encolarDocumento(CrearDocumento("Doc2", 2, "Type2"));
-        cola.encolarDocumento(CrearDocumento("Doc3", 3, "Type3"));
+        
+        NodoT root = arbol.getRoot();
+        cola.encolarDocumento(CrearDocumento(root.documento.nombre, root.documento.size, root.documento.tiempo));       
+        preOrden(root, cola);
         
         return cola;
     }
     
-    private Documento CrearDocumento(String nombre, int size, String type) {
-        Documento documento = new Documento();
+    private DocumentoEncolado CrearDocumento(String nombre, int size, int tiempo) {
+        DocumentoEncolado documento = new DocumentoEncolado();
         documento.nombre = nombre;
         documento.size = size;
-        documento.type = type;
+        documento.tiempo = tiempo;
         return documento;
+    }
+    
+    private boolean existeDocumento(Cola cola, String nombreDocumento) {
+        NodoC nodoActual = cola.obtenerPrimerNodo();
+        NodoC ultimoNodo = cola.obtenerUltimoNodo();
+        while(nodoActual != ultimoNodo) {
+            if (nodoActual.getDocumento().nombre.trim().equalsIgnoreCase(nombreDocumento.trim()))
+            {
+                return true;
+            }
+            nodoActual = nodoActual.getSiguiente();
+        }
+        return false;
+    }
+    
+    public void preOrden(NodoT nodoActual, Cola cola) {
+        if (nodoActual != null) {
+            preOrden(nodoActual.getHizq(), cola);
+            if (!existeDocumento(cola, nodoActual.documento.nombre))
+                cola.encolarDocumento(CrearDocumento(nodoActual.documento.nombre, nodoActual.documento.size, nodoActual.documento.tiempo));
+            preOrden(nodoActual.getHdcha(), cola);
+        }
     }
 }

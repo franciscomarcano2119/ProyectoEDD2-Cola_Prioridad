@@ -5,7 +5,19 @@
 package Funciones;
 
 import EDD.BTree;
+import EDD.Cola;
+import EDD.NodoC;
 import EDD.NodoT;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.GridLayout;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import org.graphstream.graph.Graph;
+import org.graphstream.graph.implementations.MultiGraph;
+import org.graphstream.ui.swing_viewer.SwingViewer;
+import org.graphstream.ui.swing_viewer.ViewPanel;
+import org.graphstream.ui.view.Viewer;
 
 /**
  *
@@ -117,5 +129,50 @@ public class FuncionBST {
 //      public BTree crearBST(  ){
 //    
 //        }
+    
+    public void viewArbol(Graph graph) {
+        JFrame frame = new JFrame();
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        
+        JPanel panel = new JPanel(new GridLayout()){
+        @Override
+        public Dimension getPreferredSize() {
+            return new Dimension(640, 480);
+            }
+        };
+        frame.setSize(panel.getWidth(), panel.getHeight());
+        frame.setBackground(Color.blue);
+        Viewer viewer = new SwingViewer(graph, Viewer.ThreadingModel.GRAPH_IN_GUI_THREAD);
+        viewer.enableAutoLayout();
+        ViewPanel viewPanel = (ViewPanel)viewer.addDefaultView(false);
+        panel.add(viewPanel);
+        frame.add(panel);
+        frame.pack();
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);  
+        
+    }
+    
+    public Graph drawArbolImpresion (BTree arbol){
+        Graph graph = new MultiGraph("Relacion");
+        System.setProperty("org.graphstream.ui", "swing");
+        graph.setAttribute("ui.stylesheet", "node{\n"+ "size:40px,30px;\n"+"fill-color:#9EBCEF; \n"+"text-mode: normal; \n"+"}");
+        
+        NodoT root = arbol.getRoot();
+        preOrden(root, null, graph);
+        return graph;
+    }
+    
+    public void preOrden(NodoT nodoActual, NodoT nodoAnterior, Graph graph) {
+        if (nodoActual != null) {
+            graph.addNode(nodoActual.documento.nombre).setAttribute("ui.label",nodoActual.documento.nombre);
+            
+            if (nodoAnterior != null) {
+               graph.addEdge(nodoActual.documento.nombre, nodoAnterior.documento.nombre, nodoActual.documento.nombre, true); 
+            }
+            preOrden(nodoActual.getHizq(), nodoActual, graph);
+            preOrden(nodoActual.getHdcha(), nodoActual, graph);
+        }
+    }
 
 }

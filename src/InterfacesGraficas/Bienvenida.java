@@ -5,12 +5,21 @@
 package InterfacesGraficas;
 
 import EDD.Cola;
+import Funciones.FuncionBST;
 import org.graphstream.graph.Graph;
 import Funciones.FuncionCola;
+import java.text.DateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
+import javax.swing.JOptionPane;
+import static proyectoedd_2_colaprioridad.Main.arbolDocumentoEncolados;
+import static proyectoedd_2_colaprioridad.Main.tiempoInicioSimulacion;
 
 /**
  *
- * @author yaxim
+ * @author francisco
  */
 public class Bienvenida extends javax.swing.JFrame {
 
@@ -22,6 +31,7 @@ public class Bienvenida extends javax.swing.JFrame {
     }
     
     FuncionCola funcionesCola = new FuncionCola();
+    FuncionBST funcionesBTree = new FuncionBST();
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -45,6 +55,7 @@ public class Bienvenida extends javax.swing.JFrame {
         AgregarUsuario = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        ArbolImpresion = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -52,17 +63,31 @@ public class Bienvenida extends javax.swing.JFrame {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(425, 112, -1, -1));
 
+        jPanel2.setBackground(new java.awt.Color(153, 153, 153));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Swis721 BdCnOul BT", 3, 48)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Bienvenida");
-        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, 320, 50));
+        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 40, 320, 50));
 
+        InciarSimulacion.setBackground(new java.awt.Color(51, 51, 51));
+        InciarSimulacion.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
+        InciarSimulacion.setForeground(new java.awt.Color(255, 255, 255));
         InciarSimulacion.setText("Iniciar Simulación");
+        InciarSimulacion.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        InciarSimulacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                InciarSimulacionActionPerformed(evt);
+            }
+        });
         jPanel2.add(InciarSimulacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, 180, -1));
 
+        CargarArchivo.setBackground(new java.awt.Color(51, 51, 51));
+        CargarArchivo.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
+        CargarArchivo.setForeground(new java.awt.Color(255, 255, 255));
         CargarArchivo.setText("Cargar Archivo");
+        CargarArchivo.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         CargarArchivo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CargarArchivoActionPerformed(evt);
@@ -70,6 +95,9 @@ public class Bienvenida extends javax.swing.JFrame {
         });
         jPanel2.add(CargarArchivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, 180, -1));
 
+        EliminarUsuario.setBackground(new java.awt.Color(51, 51, 51));
+        EliminarUsuario.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
+        EliminarUsuario.setForeground(new java.awt.Color(255, 255, 255));
         EliminarUsuario.setText("Eliminar Usuarios");
         EliminarUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -78,7 +106,11 @@ public class Bienvenida extends javax.swing.JFrame {
         });
         jPanel2.add(EliminarUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 290, 180, -1));
 
-        CrearDocumento.setText("Crear Documentos");
+        CrearDocumento.setBackground(new java.awt.Color(51, 51, 51));
+        CrearDocumento.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
+        CrearDocumento.setForeground(new java.awt.Color(255, 255, 255));
+        CrearDocumento.setText("Agregar Documentos");
+        CrearDocumento.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         CrearDocumento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CrearDocumentoActionPerformed(evt);
@@ -86,31 +118,47 @@ public class Bienvenida extends javax.swing.JFrame {
         });
         jPanel2.add(CrearDocumento, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 170, 200, -1));
 
-        AgregarDocumento.setText("Agregar Documentos");
+        AgregarDocumento.setBackground(new java.awt.Color(51, 51, 51));
+        AgregarDocumento.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
+        AgregarDocumento.setForeground(new java.awt.Color(255, 255, 255));
+        AgregarDocumento.setText("Agregar Documentos Cola");
+        AgregarDocumento.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         AgregarDocumento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 AgregarDocumentoActionPerformed(evt);
             }
         });
-        jPanel2.add(AgregarDocumento, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 210, 200, -1));
+        jPanel2.add(AgregarDocumento, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 250, 200, -1));
 
+        EliminarDocumento.setBackground(new java.awt.Color(51, 51, 51));
+        EliminarDocumento.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
+        EliminarDocumento.setForeground(new java.awt.Color(255, 255, 255));
         EliminarDocumento.setText("Eliminar Documentos");
+        EliminarDocumento.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         EliminarDocumento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 EliminarDocumentoActionPerformed(evt);
             }
         });
-        jPanel2.add(EliminarDocumento, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 250, 200, -1));
+        jPanel2.add(EliminarDocumento, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 210, 200, -1));
 
+        ColaImpresion.setBackground(new java.awt.Color(51, 51, 51));
+        ColaImpresion.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
+        ColaImpresion.setForeground(new java.awt.Color(255, 255, 255));
         ColaImpresion.setText("Visualizar Cola de Impresión");
+        ColaImpresion.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         ColaImpresion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ColaImpresionActionPerformed(evt);
             }
         });
-        jPanel2.add(ColaImpresion, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 330, 200, -1));
+        jPanel2.add(ColaImpresion, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 330, 200, 20));
 
+        AgregarUsuario.setBackground(new java.awt.Color(51, 51, 51));
+        AgregarUsuario.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
+        AgregarUsuario.setForeground(new java.awt.Color(255, 255, 255));
         AgregarUsuario.setText("Agregar Usuarios");
+        AgregarUsuario.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         AgregarUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 AgregarUsuarioActionPerformed(evt);
@@ -118,13 +166,32 @@ public class Bienvenida extends javax.swing.JFrame {
         });
         jPanel2.add(AgregarUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 250, 180, -1));
 
+        jButton1.setBackground(new java.awt.Color(51, 51, 51));
+        jButton1.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setText("Lista Usurios y Documentos");
-        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 330, 180, -1));
+        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 330, -1, -1));
 
+        jButton3.setBackground(new java.awt.Color(51, 51, 51));
+        jButton3.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
+        jButton3.setForeground(new java.awt.Color(255, 255, 255));
         jButton3.setText("Eliminar Documento Encolado");
+        jButton3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel2.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 290, 200, -1));
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 590, 400));
+        ArbolImpresion.setBackground(new java.awt.Color(51, 51, 51));
+        ArbolImpresion.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
+        ArbolImpresion.setForeground(new java.awt.Color(255, 255, 255));
+        ArbolImpresion.setText("Visualizar Arbol de Impresión");
+        ArbolImpresion.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        ArbolImpresion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ArbolImpresionActionPerformed(evt);
+            }
+        });
+        jPanel2.add(ArbolImpresion, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 380, 200, 20));
+
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 560, 450));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -164,7 +231,7 @@ public class Bienvenida extends javax.swing.JFrame {
     private void AgregarDocumentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AgregarDocumentoActionPerformed
         // TODO add your handling code here:
         
-        AgregarDocumento adDocument = new AgregarDocumento();
+        AgregarDocumentoCola adDocument = new AgregarDocumentoCola();
         adDocument.setVisible(true);
         adDocument.setLocationRelativeTo(null); 
         
@@ -180,10 +247,27 @@ public class Bienvenida extends javax.swing.JFrame {
 
     private void ColaImpresionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ColaImpresionActionPerformed
         // TODO add your handling code here:
-        Cola cola = funcionesCola.crearCola();
+        Cola cola = funcionesCola.crearCola(arbolDocumentoEncolados);
         Graph dibujoCola = funcionesCola.drawColaImpresion(cola);
         funcionesCola.viewCola(dibujoCola);
     }//GEN-LAST:event_ColaImpresionActionPerformed
+
+    private void InciarSimulacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InciarSimulacionActionPerformed
+        // TODO add your handling code here:
+        Calendar calendar = Calendar.getInstance();
+        tiempoInicioSimulacion = calendar.getTime();
+        //Calendar calendarInicial = calendar.setTime(tiempoInicioSimulacion);
+        
+        
+        JOptionPane.showMessageDialog(null, "Iniciando simulación: " + tiempoInicioSimulacion.toString());
+    }//GEN-LAST:event_InciarSimulacionActionPerformed
+
+    private void ArbolImpresionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ArbolImpresionActionPerformed
+        // TODO add your handling code here:
+        
+        Graph dibujoArbol = funcionesBTree.drawArbolImpresion(arbolDocumentoEncolados);
+        funcionesBTree.viewArbol(dibujoArbol);
+    }//GEN-LAST:event_ArbolImpresionActionPerformed
 
     /**
      * @param args the command line arguments
@@ -224,6 +308,7 @@ public class Bienvenida extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AgregarDocumento;
     private javax.swing.JButton AgregarUsuario;
+    private javax.swing.JButton ArbolImpresion;
     private javax.swing.JButton CargarArchivo;
     private javax.swing.JButton ColaImpresion;
     private javax.swing.JButton CrearDocumento;

@@ -14,6 +14,8 @@ public class NodoT {
     public String user;
     public int orden;
     public int key;
+    public DocumentoEncolado documento;
+    public int tiempo;
 
     public NodoT(String user, int orden, int key) {
         this.hizq = null;
@@ -21,6 +23,13 @@ public class NodoT {
         this.user = user;
         this.orden = orden;
         this.key = key;
+    }
+    
+    public NodoT(DocumentoEncolado documento) {
+        this.hizq = null;
+        this.hdcha = null;
+        this.documento = documento;
+        this.tiempo = documento.tiempo;
     }
 
     public Object getUser() {
@@ -57,6 +66,10 @@ public class NodoT {
 
     public int getKey() {
         return key;
+    }
+    
+    public int getTiempo() {
+        return tiempo;
     }
 
     public void setKey(int key) {
