@@ -133,10 +133,6 @@ public class FuncionCola {
         cola.encolarDocumento(CrearDocumento(root.documento.nombre, root.documento.size, root.documento.tiempo));       
         preOrden(root, cola);
         
-//        cola.encolarDocumento(CrearDocumento("Doc1", 1, "Type1"));
-//        cola.encolarDocumento(CrearDocumento("Doc2", 2, "Type2"));
-//        cola.encolarDocumento(CrearDocumento("Doc3", 3, "Type3"));
-        
         return cola;
     }
     
