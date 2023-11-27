@@ -25,7 +25,7 @@ import org.graphstream.ui.view.Viewer;
 
 /**
  *
- * @author yaxim
+ * @author francisco
  */
 public class FuncionCola {
 //    Grafo grafoAux = new Grafo();

@@ -30,7 +30,7 @@ import java.awt.event.*;
 
 /**
  *
- * @author yaxim
+ * @author francisco
  */
 public class AgregarUsuario extends javax.swing.JFrame {
 

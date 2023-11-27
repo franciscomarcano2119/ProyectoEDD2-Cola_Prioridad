@@ -10,7 +10,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author yaxim
+ * @author francisco
  */
 public class EliminarDocumento extends javax.swing.JFrame {
 

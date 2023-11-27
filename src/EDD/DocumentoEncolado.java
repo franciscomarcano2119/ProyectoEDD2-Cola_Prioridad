@@ -6,7 +6,7 @@ package EDD;
 
 /**
  *
- * @author yaxim
+ * @author francisco
  */
 public class DocumentoEncolado {
     public String nombre;

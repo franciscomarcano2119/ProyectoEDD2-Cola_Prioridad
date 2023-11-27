@@ -19,7 +19,7 @@ import static proyectoedd_2_colaprioridad.Main.tiempoInicioSimulacion;
 
 /**
  *
- * @author yaxim
+ * @author francisco
  */
 public class Bienvenida extends javax.swing.JFrame {
 
@@ -189,9 +189,9 @@ public class Bienvenida extends javax.swing.JFrame {
                 ArbolImpresionActionPerformed(evt);
             }
         });
-        jPanel2.add(ArbolImpresion, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 370, 200, 20));
+        jPanel2.add(ArbolImpresion, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 380, 200, 20));
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 590, 400));
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 560, 450));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

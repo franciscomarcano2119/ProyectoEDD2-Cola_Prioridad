@@ -8,7 +8,7 @@ import java.util.List;
 
 /**
  *
- * @author yaxim
+ * @author francisco
  */
 public class Usuario {
     public String nombre;
