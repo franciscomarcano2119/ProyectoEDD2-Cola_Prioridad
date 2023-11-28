@@ -4,19 +4,46 @@
  */
 package InterfacesGraficas;
 
+import EDD.Usuario;
+import Funciones.FunctionTXT;
+import Funciones.LeerArchivo;
+import java.awt.BorderLayout;
+import java.awt.FlowLayout;
+import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+
 /**
  *
- * @author yaxim
+ * @author francisco
  */
 public class AgregarUsuario extends javax.swing.JFrame {
 
     /**
      * Creates new form AgregarUsuario
      */
+    private JComboBox priorityList;
+    private JButton submitButton;
+    private String[] priorities = {"Baja", "Media", "Alta"};
+    
     public AgregarUsuario() {
         initComponents();
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -28,13 +55,13 @@ public class AgregarUsuario extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        Exit = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        ListaPrioridades = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        AgregarUsuario = new javax.swing.JButton();
+        Exit = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -42,18 +69,14 @@ public class AgregarUsuario extends javax.swing.JFrame {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 106, -1, -1));
 
+        jPanel2.setBackground(new java.awt.Color(153, 153, 153));
+        jPanel2.setForeground(new java.awt.Color(153, 153, 153));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        Exit.setText("Salir");
-        Exit.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ExitActionPerformed(evt);
-            }
-        });
-        jPanel2.add(Exit, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 190, -1, -1));
-
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Nombre de Usuario : ");
-        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 60, 120, 20));
+        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 60, 130, 20));
 
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -62,31 +85,122 @@ public class AgregarUsuario extends javax.swing.JFrame {
         });
         jPanel2.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 60, 210, -1));
 
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Tipo :");
-        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 100, -1, -1));
+        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 100, 40, -1));
 
-        jPanel2.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 100, 180, -1));
+        ListaPrioridades.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Prioridad Alta", "Prioridad Media", "Prioridad Baja" }));
+        ListaPrioridades.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ListaPrioridadesActionPerformed(evt);
+            }
+        });
+        jPanel2.add(ListaPrioridades, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 100, 180, -1));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("!! El nivel de prioridad alterara su orden de impresion !!");
         jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 130, -1, -1));
 
-        jButton1.setText("Agregar");
-        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 180, 120, 30));
+        AgregarUsuario.setBackground(new java.awt.Color(51, 51, 51));
+        AgregarUsuario.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
+        AgregarUsuario.setForeground(new java.awt.Color(255, 255, 255));
+        AgregarUsuario.setText("Agregar");
+        AgregarUsuario.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        AgregarUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AgregarUsuarioActionPerformed(evt);
+            }
+        });
+        jPanel2.add(AgregarUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 170, 120, 30));
+
+        Exit.setBackground(new java.awt.Color(102, 102, 102));
+        Exit.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        Exit.setForeground(new java.awt.Color(255, 255, 255));
+        Exit.setText("Salir");
+        Exit.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        Exit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ExitActionPerformed(evt);
+            }
+        });
+        jPanel2.add(Exit, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 190, 50, 30));
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 510, 260));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1ActionPerformed
+
     private void ExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExitActionPerformed
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_ExitActionPerformed
+    private boolean validarUser(String[] users, String userId, String userName) {
+            try{
+                Integer.parseInt(userId);
+                if (userName.trim().charAt(0) != '@'){
+                    return false;     
+                }
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+                for (int i = 1; i < users.length; i++) {
+                   String[] info = users[i].trim().split(",");
+                   String username = info[1].trim();
+                   String id = info[0].trim();  
+                   if (Integer.parseInt(id) == Integer.parseInt(userId)) {
+                       return false;
+                   }
+                   if (userName == username) {
+                       return false;
+                   }  
+                }
+
+            }catch(Exception e){
+                return false;
+            }
+            return true;
+        }
+    private void AgregarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AgregarUsuarioActionPerformed
+
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+        String nombre = jTextField1.getText();
+
+        String valorSeleccionado = (String) ListaPrioridades.getSelectedItem();
+        int prioridad = 3;
+        if ("Prioridad Alta".equals(valorSeleccionado)){
+            prioridad = 1;
+        }
+        if ("Prioridad Media".equals(valorSeleccionado)){
+            prioridad = 2;
+        }
+        if ("Prioridad Baja".equals(valorSeleccionado)){
+            prioridad = 3;
+        }
+        
+        AgregarUsuarioArchivo(nombre, prioridad);
+        
+        JOptionPane.showMessageDialog(null, "Usuario Agregado exitosamente! ");
+       
+    }//GEN-LAST:event_AgregarUsuarioActionPerformed
+
+    private void AgregarUsuarioArchivo(String nombreUsuario, int prioridad) {
+        // TODO add your handling code here:
+        LeerArchivo f = new LeerArchivo();
+        FunctionTXT content = new FunctionTXT();
+        String listaUsuarios = f.leertxt("src\\Files\\usuarios.csv");
+        String usuarioNuevo = nombreUsuario + ", " + Integer.toString(prioridad);
+        listaUsuarios += usuarioNuevo + "\n";      
+        
+        content.escribir_txt(listaUsuarios);
+    }
+
+    private void ListaPrioridadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ListaPrioridadesActionPerformed
+
+    }//GEN-LAST:event_ListaPrioridadesActionPerformed
 
     /**
      * @param args the command line arguments
@@ -124,9 +238,9 @@ public class AgregarUsuario extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton AgregarUsuario;
     private javax.swing.JButton Exit;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> ListaPrioridades;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
